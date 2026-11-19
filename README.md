@@ -1,58 +1,93 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🎤 BI Got Talent — Web
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Aplikasi web pendaftaran lomba bakat siswa **SMK Bina Informatika**. Siswa dapat melihat mata lomba, mendaftar, dan memantau status pendaftarannya. Admin mengelola mata lomba, akun siswa, dan tahapan seleksi peserta.
 
-## About Laravel
+Dibuat untuk Ulangan Harian mata pelajaran **Pemrograman Web 2** di bawah bimbingan **Ibu Nia Adiyanti**.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+> Versi desktop (Java Swing + MySQL): [BiGotTalent-Desktop](https://github.com/Quicksilveer/BiGotTalent-Desktop)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## ✨ Fitur
 
-## Learning Laravel
+**Admin**
+- Kelola mata lomba: tambah, ubah, dan hapus (CRUD)
+- Kelola akun siswa: tambah, ubah, dan hapus (CRUD)
+- Kelola status pendaftaran peserta: **Dokumen dalam Tinjauan → Jadwal Briefing → Tahap Pelatihan → Final**
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+**Siswa**
+- Registrasi dan login akun
+- Mendaftar mata lomba dengan mengisi kelas dan nomor WhatsApp
+- Validasi agar siswa tidak mendaftar lomba yang sama dua kali
+- Riwayat pendaftaran beserta status seleksi terbaru
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+**Keamanan & Akses**
+- Autentikasi Laravel Breeze (login, registrasi, lupa password, edit profil)
+- Role-based access control dengan middleware `role:admin` dan `role:siswa`
+- Pengalihan otomatis ke dashboard sesuai role setelah login
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+---
 
-## Agentic Development
+## 🛠️ Tech Stack
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+| Kategori | Teknologi |
+|---|---|
+| Backend | PHP 8.3, Laravel 13, Laravel Breeze |
+| Frontend | Blade, Tailwind CSS, Alpine.js, Vite |
+| Database | MySQL (XAMPP) |
+| Tools | Git, GitHub, Composer, NPM, VS Code |
+
+---
+
+## 🗂️ Struktur Data
+
+| Tabel | Isi |
+|---|---|
+| `users` | Akun admin dan siswa (kolom `role`) |
+| `lombas` | Nama dan deskripsi mata lomba |
+| `pendaftarans` | Siswa, lomba, kelas, no. WA, dan status seleksi |
+
+---
+
+## ⚙️ Cara Menjalankan
+
+**Prasyarat:** PHP 8.3+, Composer, Node.js & NPM, XAMPP (MySQL)
 
 ```bash
-composer require laravel/boost --dev
+git clone https://github.com/Quicksilveer/BiGotTalent-Web.git
+cd BiGotTalent-Web
 
-php artisan boost:install
+composer install
+npm install
+
+copy .env.example .env      # Windows (Linux/Mac: cp .env.example .env)
+php artisan key:generate
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+Buat database `db_bi_got_talent` di phpMyAdmin, lalu atur file `.env`:
 
-## Contributing
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=db_bi_got_talent
+DB_USERNAME=root
+DB_PASSWORD=
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+php artisan migrate
+npm run dev
+php artisan serve
+```
 
-## Code of Conduct
+Buka `http://127.0.0.1:8000`.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+**Membuat akun admin:** daftar akun baru lewat halaman Register, lalu ubah kolom `role` akun tersebut menjadi `admin` di tabel `users` melalui phpMyAdmin. Akun baru otomatis ber-role `siswa`.
 
-## Security Vulnerabilities
+---
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## 👤 Pengembang
 
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+**Mikhael** — Murid RPL, SMK Bina Informatika
+[GitHub @Quicksilveer](https://github.com/Quicksilveer)
