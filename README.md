@@ -2,7 +2,7 @@
 
 Aplikasi web pendaftaran lomba bakat siswa **SMK Bina Informatika**. Siswa dapat melihat mata lomba, mendaftar, dan memantau status pendaftarannya. Admin mengelola mata lomba, akun siswa, dan tahapan seleksi peserta.
 
-Dibuat untuk Ulangan Harian mata pelajaran **Pemrograman Web 2** di bawah bimbingan **Ibu Nia Adiyanti**.
+Dibuat sebagai proyek mata pelajaran **Pemrograman Web 2** di bawah bimbingan **Ibu Nia Adiyanti**.
 
 > Versi desktop (Java Swing + MySQL): [BiGotTalent-Desktop](https://github.com/Quicksilveer/BiGotTalent-Desktop)
 
